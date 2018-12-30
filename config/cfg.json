@@ -1,0 +1,23 @@
+{
+  "Bot-Data": {
+    "Token": "InsertYourTokenHere.XXXXXX.XXXXXXXXX-XXXXXXXXXXXX",
+    "ClientID": 0,
+    "Locale": "en_US.utf8",
+    "Bot-OwnerID": 0,
+    "Bot-Guild": 0,
+    "BotPrefix": "!"
+  },
+  "Twitter": {
+    "Notifications": false,
+    "Message": "",
+    "Sended": false,
+    "ConsumerAPIKey": "",
+    "ConsumerAPISecret": "",
+    "AccessToken": "",
+    "AccessSecret": ""
+  },
+  "Twitch": {
+    "TwitchToken": "",
+    "TwitchChannelName": ""
+  }
+}
