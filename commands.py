@@ -11,7 +11,7 @@ from discord.ext.commands import is_owner
 start_time = time.time()
 
 
-class Twitter:
+class Twitter(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot: commands.Bot = bot
         # logger.info('Addon "{}" loaded'.format(self.__class__.__name__))
@@ -47,7 +47,7 @@ class Twitter:
         """Deactivate the Twitter Notifications"""
         with open('config/cfg.json', 'r') as f:
             config = json.load(f)
-        config['Twitter']['Notifications'] = False  # or whatever
+        config['Twitter']['Notifications'] = False
         with open('config/cfg.json', 'w') as f:
             json.dump(config, f)
         await ctx.send(embed=discord.Embed(
@@ -63,13 +63,15 @@ class Twitter:
         if config['Twitter']['Notifications']:
             await ctx.send(embed=discord.Embed(
                 title=f"Your Twitterbot is activated:",
-                description=f"The actual Tweet Content is: "
-                f"\n```{config['Twitter']['Message']}```", color=0x9b006f))
+                description=f"Twitch Channel: **{config['Twitch']['TwitchChannelName']}**\n\n"
+                f"The actual Tweet Content is: \n```{config['Twitter']['Message']}```",
+                color=0x9b006f))
         else:
             await ctx.send(embed=discord.Embed(
                 title=f"Your Twitterbot is deactivated:",
-                description=f"The actual Tweet Content is: "
-                f"\n```{config['Twitter']['Message']}```", color=0x9b006f))
+                description=f"Twitch Channel: **{config['Twitch']['TwitchChannelName']}**\n\n"
+                f"The actual Tweet Content is: \n```{config['Twitter']['Message']}```",
+                color=0x9b006f))
     
     @twitter.command()
     @is_owner()
@@ -78,7 +80,7 @@ class Twitter:
         if len(message) < 280:
             with open('config/cfg.json', 'r') as f:
                 config = json.load(f)
-            config['Twitter']['Message'] = message  # or whatever
+            config['Twitter']['Message'] = message
             with open('config/cfg.json', 'w') as f:
                 json.dump(config, f)
             await ctx.send(embed=discord.Embed(
@@ -86,7 +88,7 @@ class Twitter:
                 description=f"{message}", color=0x722f37))
         else:
             await ctx.send(embed=discord.Embed(color=0x722f37,
-                                               description=f"This Message is to long! Twitter "
+                                               description=f"This Message is too long! Twitter "
                                                f"only allows a maximum of 280 characters"))
     
     @twitter.command()
